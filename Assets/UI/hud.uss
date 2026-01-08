@@ -1,0 +1,6 @@
+:root {
+}
+
+.hide {
+    visibility: hidden;
+}

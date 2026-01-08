@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/interactPopup.uss?fileID=7433441132597879392&amp;guid=28f13adcbc38b48d0b5b5deadd83707e&amp;type=3#interactPopup" />
+    <ui:VisualElement name="InteractIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UI/Icons/IconSet_1%20(34).png?fileID=2800000&amp;guid=ec6857a89cef2467bbee01aedcc36bd2&amp;type=3#IconSet_1 (34)&quot;); visibility: visible;" />
+</ui:UXML>
