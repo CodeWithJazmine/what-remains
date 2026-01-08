@@ -148,9 +148,9 @@ public class PlayerInputManager : MonoBehaviour
         if (survivor.visualRoot != null)
         {
             if (input.x < -0.01f)
-                survivor.visualRoot.localRotation = Quaternion.Euler(0f, 180f, 0f);
+                survivor.visualRoot.localRotation = Quaternion.Euler(0f, -90f, 0f);
             else if (input.x > 0.01f)
-                survivor.visualRoot.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                survivor.visualRoot.localRotation = Quaternion.Euler(0f, 90f, 0f);
         }
 
         // Animate survivor
