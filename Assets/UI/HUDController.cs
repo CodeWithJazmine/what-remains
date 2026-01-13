@@ -29,11 +29,11 @@ public class HUDController : MonoBehaviour
     {
         TogglePhaseIntroText();
 
-        if (phaseCount % 2 == 0) // Day
+        if (phaseCount % 2 == 1) // Day
         {
-            phaseIntro.text = $"Day {phaseCount + 1}";
+            phaseIntro.text = $"Day {phaseCount}";
         }
-        else if (phaseCount % 2 == 1) // Night
+        else if (phaseCount % 2 == 0) // Night
         {
             phaseIntro.text = $"Night {phaseCount}";
         }

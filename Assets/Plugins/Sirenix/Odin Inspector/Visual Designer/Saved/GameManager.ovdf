@@ -1,0 +1,37 @@
+OVDF v1.1
+GameManager, Assembly-CSharp
+MetaGuid:3d94417b3e090455a9676446a2b19b20
+
+# $43UCo5Nxqp8xaGAWknC8qQ
+Position: $C9CVWLSxLJng2GQWMdKNEV:0
++ [Sirenix.OdinInspector.ButtonGroupAttribute]
+	GroupName = "Testing"
+
+# $C9CVWLSxLJng2GQWMdKNEV
+Position: $root:22
++ [Sirenix.OdinInspector.TitleGroupAttribute]
+	GroupName = "Gameloop Test Buttons"
+	Subtitle = "Use these buttons to test gameplay loop"
+	Indent = False
+	HorizontalLine = True
+	Alignment = Centered
+
+# AdvancePhase()
+Position: $43UCo5Nxqp8xaGAWknC8qQ:0
+* [Sirenix.OdinInspector.ButtonAttribute]
+	Style = Box
+	Icon = Clock
+	buttonHeight = 30
+	HasDefinedButtonHeight = True
+	buttonAlignment = 0
+	HasDefinedButtonAlignment = True
+
+# EnterShelterFlow()
+Position: $43UCo5Nxqp8xaGAWknC8qQ:1
+* [Sirenix.OdinInspector.ButtonAttribute]
+	buttonHeight = 35
+	HasDefinedButtonHeight = True
+	Icon = House
+	stretch = False
+	HasDefinedStretch = True
+	Expanded = False

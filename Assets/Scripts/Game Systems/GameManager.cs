@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Sirenix.OdinInspector;
 
 #region Enums
 enum GamePhase
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
     private int currentIndex = 0;
 
     [Header("Game Loop")]
-    private GamePhase currentGamePhase;
+    //private GamePhase currentGamePhase;
     private PhaseType currentPhaseType;
     private readonly Dictionary<StationType, Survivor> assignedSurvivors = new();
     private int phaseCount = 0;
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour
     void GameLoop()
     {
         // Beginning of game
-        currentGamePhase = GamePhase.Playing;
+        //currentGamePhase = GamePhase.Playing;
         //Debug.Log($"GamePhase: {currentGamePhase}");
 
         EnterShelterFlow();
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Decides what the next phase will be based on assignments
-    [ContextMenu("DEBUG / Advance Phase")]
+    [Button("Advance Phase")]
     void AdvancePhase()
     {
         //Debug.Log("Advance Phase");
@@ -218,7 +219,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [ContextMenu("DEBUG / Enter Shelter Flow")]
+    [Button("Enter Shelter Flow")]
     void EnterShelterFlow()
     {
         PhaseIntro();
