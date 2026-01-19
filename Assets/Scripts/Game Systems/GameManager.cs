@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     //private GamePhase currentGamePhase;
     private PhaseType currentPhaseType;
     private readonly Dictionary<StationType, Survivor> assignedSurvivors = new();
-    private int phaseCount = 0;
+    private int phaseCount = 1;
 
     private void Awake()
     {
@@ -212,9 +212,8 @@ public class GameManager : MonoBehaviour
 
     void PhaseIntro()
     {
-        Time.timeScale = 0;
+        // TODO: Lock controls. Setting time to 0 doesn't work because coroutines use real time.
         StartCoroutine(hud.ShowPhaseIntro(phaseCount));
-        Time.timeScale = 1;
     }
 
     #endregion

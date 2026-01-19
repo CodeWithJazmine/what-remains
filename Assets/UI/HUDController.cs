@@ -27,32 +27,16 @@ public class HUDController : MonoBehaviour
 
     public IEnumerator ShowPhaseIntro(int phaseCount)
     {
-        TogglePhaseIntroText();
+        bool isDay = (phaseCount % 2) == 1;
+        int dayNumber = (phaseCount + 1) / 2;
 
-        if (phaseCount % 2 == 1) // Day
-        {
-            phaseIntro.text = $"Day {phaseCount}";
-        }
-        else if (phaseCount % 2 == 0) // Night
-        {
-            phaseIntro.text = $"Night {phaseCount}";
-        }
+        phaseIntro.text = isDay ? $"Day {dayNumber}" : $"Night {dayNumber}";
+
+        phaseIntro.RemoveFromClassList("hide");
 
         yield return new WaitForSeconds(popupTiming);
 
-        TogglePhaseIntroText();
-    }
-
-    void TogglePhaseIntroText()
-    {
-        if (phaseIntro.ClassListContains("hide"))
-        {
-            phaseIntro.RemoveFromClassList("hide");
-        }
-        else
-        {
-            phaseIntro.AddToClassList("hide");
-        }
+        phaseIntro.AddToClassList("hide");
     }
 
     // public void ToggleInventoryMenu()
