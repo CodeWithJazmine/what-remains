@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviour
     {
         if (survivors == null || survivors.Count == 0)
         {
-            //Debug.LogError("GameManager: No survivors assigned");
             return;
         }
 
@@ -91,6 +90,7 @@ public class GameManager : MonoBehaviour
             if (s != null && s.TryGetComponent<PlayerInputManager>(out var pim))
             {
                 pim.enabled = false;
+                pim.isMovementEnabled = true;
             }
         }
 
@@ -111,7 +111,6 @@ public class GameManager : MonoBehaviour
     {
         // Beginning of game
         //currentGamePhase = GamePhase.Playing;
-        //Debug.Log($"GamePhase: {currentGamePhase}");
 
         EnterShelterFlow();
     }
@@ -120,8 +119,6 @@ public class GameManager : MonoBehaviour
 
     void BeginPhase(PhaseType phaseType)
     {
-        //Debug.Log($"PhaseType: {phaseType}");
-
         switch (phaseType)
         {
             case PhaseType.BasePhase:
@@ -141,7 +138,6 @@ public class GameManager : MonoBehaviour
                 }
             default:
                 {
-                    //Debug.LogError("GameManager: BeginPhase() - phaseType is invalid. Review implentations.");
                     break;
                 }
         }
@@ -151,8 +147,6 @@ public class GameManager : MonoBehaviour
     [Button("Advance Phase")]
     void AdvancePhase()
     {
-        //Debug.Log("Advance Phase");
-
         // Capture any needed info BEFORE clearing assignments
         assignedSurvivors.TryGetValue(StationType.ScavengingTable, out var scavenger);
 
@@ -165,11 +159,9 @@ public class GameManager : MonoBehaviour
         if (scavenger != null)
         {
             // TODO: Load scavenging scene and set the active survivor to `scavenger`
-            //Debug.Log($"{scavenger} is going out.");
         }
         else
         {
-            //Debug.Log("Everyone stayed inside.");
             EnterShelterFlow();
         }
     }
@@ -193,14 +185,11 @@ public class GameManager : MonoBehaviour
 
         // Refresh Shelter Stations
         shelterStationsManager.RefreshStations();
-
-        //Debug.Log("EndPhase: Cleared assignments, re-enabled movement for all survivors, and refreshed stations.");
     }
 
     void PhaseSummary()
     {
         currentPhaseType = PhaseType.PhaseSummary;
-        //Debug.Log("Phase Summary");
 
         // TODO: Implement PhaseSummary
         // What happened to each survivor?
@@ -267,7 +256,6 @@ public class GameManager : MonoBehaviour
         {
             assignedSurvivors.Remove(stationType);
             playerInputManager.isMovementEnabled = true;
-            //Debug.Log($"Unassigned {currentSurvivor.survivorData.survivorName} for {stationType}");
 
             return false;
         }
@@ -276,7 +264,6 @@ public class GameManager : MonoBehaviour
         {
             assignedSurvivors.Add(stationType, currentSurvivor);
             playerInputManager.isMovementEnabled = false;
-            //Debug.Log($"Assigned {currentSurvivor.survivorData.survivorName} to {stationType}");
 
             return true;
         }
