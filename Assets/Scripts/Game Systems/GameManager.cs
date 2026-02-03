@@ -3,6 +3,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
+using UnityEngine.SceneManagement;
 
 #region Enums
 enum GamePhase
@@ -159,6 +160,8 @@ public class GameManager : MonoBehaviour
         if (scavenger != null)
         {
             // TODO: Load scavenging scene and set the active survivor to `scavenger`
+            scavenger = currentSurvivor;
+            SceneManager.LoadScene("Zone1");
         }
         else
         {

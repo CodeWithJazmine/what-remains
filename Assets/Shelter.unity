@@ -386,6 +386,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112748771}
   m_Mesh: {fileID: -5292868577753299088, guid: b215c78179e944875b04cd425a437d2a, type: 3}
+--- !u!1 &114498356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7349801505785491498, guid: 5ff0f2e92a9c6424ba121255c32e04df, type: 3}
+  m_PrefabInstance: {fileID: 3158504231902746429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &117763611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6518380276228898400, guid: 0c98e666cd9d04ae4ac9693dd25ba5fd, type: 3}
@@ -1267,9 +1272,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2840173251930382406}
     - target: {fileID: 4715406126276819484, guid: 458e3516b1ad94035bb991248969d579, type: 3}
+      propertyPath: survivors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715406126276819484, guid: 458e3516b1ad94035bb991248969d579, type: 3}
       propertyPath: shelterStationsManager
       value: 
       objectReference: {fileID: 898716798}
+    - target: {fileID: 4715406126276819484, guid: 458e3516b1ad94035bb991248969d579, type: 3}
+      propertyPath: 'survivors.Array.data[0]'
+      value: 
+      objectReference: {fileID: 114498356}
+    - target: {fileID: 4715406126276819484, guid: 458e3516b1ad94035bb991248969d579, type: 3}
+      propertyPath: 'survivors.Array.data[1]'
+      value: 
+      objectReference: {fileID: 854965571}
     - target: {fileID: 8763387135830698424, guid: 458e3516b1ad94035bb991248969d579, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -1457,6 +1474,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817608147}
   m_Mesh: {fileID: -2801726311949589262, guid: b215c78179e944875b04cd425a437d2a, type: 3}
+--- !u!1 &854965571 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4670943835016600766, guid: 77de74177e03f4f3584c7e790f0bc80c, type: 3}
+  m_PrefabInstance: {fileID: 2644062290339914521}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &876365140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3810,12 +3832,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1859508861578000515, guid: 77de74177e03f4f3584c7e790f0bc80c, type: 3}
-      propertyPath: survivor
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1859508861578000515, guid: 77de74177e03f4f3584c7e790f0bc80c, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263715724194005259, guid: 77de74177e03f4f3584c7e790f0bc80c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4499,6 +4517,7 @@ SceneRoots:
   - {fileID: 1354303148519371856}
   - {fileID: 5494163715143799724}
   - {fileID: 9160777386737357590}
+  - {fileID: 770359370}
   - {fileID: 1287473479244481130}
   - {fileID: 878910940643363857}
   - {fileID: 7360148712781468130}
@@ -4507,4 +4526,3 @@ SceneRoots:
   - {fileID: 2644062290339914521}
   - {fileID: 898716799}
   - {fileID: 985942009}
-  - {fileID: 770359370}
