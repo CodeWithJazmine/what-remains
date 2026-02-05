@@ -36,8 +36,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     [SerializeField] private CinemachineCamera cinemachineCamera;
-
     [SerializeField] ShelterStationsManager shelterStationsManager;
+    [SerializeField] GameObject needed;
 
     [Header("Input References")]
     [SerializeField] private HUDController hud;
@@ -67,6 +67,13 @@ public class GameManager : MonoBehaviour
         }
 
         playerInput = GetComponent<PlayerInput>();
+
+        DontDestroyOnLoad(needed);
+        foreach (var s in survivors)
+        {
+            DontDestroyOnLoad(s);
+        }
+
     }
 
     void Start()
@@ -160,7 +167,15 @@ public class GameManager : MonoBehaviour
         if (scavenger != null)
         {
             // TODO: Load scavenging scene and set the active survivor to `scavenger`
-            scavenger = currentSurvivor;
+            var scavengerGO = scavenger.gameObject;
+            foreach (var s in survivors)
+            {
+                if (s != scavenger)
+                {
+                    s.SetActive(s == scavengerGO);
+                }
+            }
+            currentPhaseType = PhaseType.ScavengingPhase;
             SceneManager.LoadScene("Zone1");
         }
         else
@@ -213,6 +228,16 @@ public class GameManager : MonoBehaviour
     [Button("Enter Shelter Flow")]
     void EnterShelterFlow()
     {
+        if (currentPhaseType == PhaseType.ScavengingPhase)
+        {
+            SceneManager.LoadScene("Shelter");
+
+            foreach (var s in survivors)
+            {
+                s.SetActive(true);
+            }
+        }
+
         PhaseIntro();
         PhaseSummary();
 
@@ -222,7 +247,7 @@ public class GameManager : MonoBehaviour
 
     public void NextSurvivor()
     {
-        if (survivors == null || survivors.Count == 0) return;
+        if (currentPhaseType != PhaseType.BasePhase || survivors == null || survivors.Count == 0) return;
 
         // Disable the previous survivor's input manager
         if (currentSurvivor != null && currentSurvivor.TryGetComponent<PlayerInputManager>(out var oldInput))
