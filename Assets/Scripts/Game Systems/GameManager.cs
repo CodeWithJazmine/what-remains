@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using Sirenix.Utilities;
 
 #region Enums
 enum GamePhase
@@ -37,7 +39,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] private CinemachineCamera cinemachineCamera;
     [SerializeField] ShelterStationsManager shelterStationsManager;
-    [SerializeField] GameObject needed;
 
     [Header("Input References")]
     [SerializeField] private HUDController hud;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> survivors;
     [SerializeField] private Survivor currentSurvivor;
     private int currentIndex = 0;
+    private List<Transform> spawnPoints = new List<Transform>();
 
     [Header("Game Loop")]
     //private GamePhase currentGamePhase;
@@ -65,10 +67,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         playerInput = GetComponent<PlayerInput>();
 
-        DontDestroyOnLoad(needed);
         foreach (var s in survivors)
         {
             DontDestroyOnLoad(s);
@@ -80,7 +80,10 @@ public class GameManager : MonoBehaviour
     {
         // Main Menu
         // currentGamePhase = GamePhase.MainMenu;
-        InitializeGame();
+        if (currentPhaseType != PhaseType.ScavengingPhase)
+        {
+            InitializeGame();
+        }
 
         GameLoop();
     }
@@ -298,5 +301,14 @@ public class GameManager : MonoBehaviour
 
         return true;
 
+    }
+
+    public void RegisterSpawnPoints(List<Transform> sps)
+    {
+        foreach (Transform p in sps)
+        {
+            spawnPoints.Add(p);
+            Debug.Log($"Added point: {p}");
+        }
     }
 }
