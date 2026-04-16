@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     private int currentIndex = 0;
     private List<Transform> spawnPoints = new List<Transform>();
     private readonly List<GameObject> spawnedSurvivors = new();
+    private Survivor scavengingSurvivor;
 
     [Header("Game Loop")]
     //private GamePhase currentGamePhase;
@@ -68,12 +69,51 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(hud);
         playerInput = GetComponent<PlayerInput>();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start()
     {
         GameLoop();
+    }
+
+    void Update()
+    {
+#if UNITY_EDITOR
+        if (Keyboard.current.f1Key.wasPressedThisFrame)
+            AdvancePhase();
+        if (Keyboard.current.f2Key.wasPressedThisFrame)
+            EnterShelterFlow();
+#endif
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Zone1" && scavengingSurvivor != null)
+        {
+            cinemachineCamera = FindFirstObjectByType<CinemachineCamera>();
+
+            GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+
+            if (spawnPoint != null)
+            {
+                scavengingSurvivor.transform.position = spawnPoint.transform.position;
+                scavengingSurvivor.transform.rotation = spawnPoint.transform.rotation;
+            }
+
+            currentSurvivor = scavengingSurvivor;
+
+            if (currentSurvivor.TryGetComponent<PlayerInputManager>(out var inputManager))
+            {
+                inputManager.enabled = true;
+            }
+
+            hud.UpdateSurvivorPanel(currentSurvivor);
+            cinemachineCamera.Follow = currentSurvivor.transform;
+        }
     }
 
     void InitializeGame()
@@ -170,6 +210,9 @@ public class GameManager : MonoBehaviour
 
         if (scavenger != null)
         {
+            scavengingSurvivor = scavenger;
+            currentSurvivor = scavengingSurvivor;
+            DontDestroyOnLoad(scavengingSurvivor.gameObject);
             // TODO: Load scavenging scene and set the active survivor to `scavenger`
             var scavengerGO = scavenger.gameObject;
             foreach (var s in spawnedSurvivors)
@@ -234,6 +277,11 @@ public class GameManager : MonoBehaviour
     {
         if (currentPhaseType == PhaseType.ScavengingPhase)
         {
+            if (scavengingSurvivor != null)
+            {
+                Destroy(scavengingSurvivor.gameObject);
+                scavengingSurvivor = null;
+            }
             SceneManager.LoadScene("Shelter");
 
             foreach (var s in spawnedSurvivors)
@@ -346,6 +394,11 @@ public class GameManager : MonoBehaviour
             spawnedSurvivors.Add(spawnedSurvivor);
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
 }
